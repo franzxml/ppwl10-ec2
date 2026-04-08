@@ -1,0 +1,27 @@
+name: monorepo
+
+services:
+  backend:
+    build:
+      context: .                        # root = context supaya bisa akses packages/shared
+      dockerfile: apps/backend/Dockerfile
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    environment:
+      FRONTEND_URL: http://localhost:5173
+      DATABASE_URL: file:/app/apps/backend/dev.db
+      GOOGLE_REDIRECT_URI: http://localhost:3000/auth/callback
+
+  frontend:
+    build:
+      context: .
+      dockerfile: apps/frontend/Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  db_data:
