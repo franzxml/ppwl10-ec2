@@ -1,4 +1,4 @@
-# PPWL9 Fullstack Monorepo (Docker)
+# PPWL10 Fullstack Monorepo EC2
 
 ## Deskripsi
 Proyek ini adalah monorepo modern yang dikelola menggunakan **Bun**. Mengintegrasikan Backend (Elysia/Prisma), Frontend (React/Vite), dan Shared Packages untuk membangun aplikasi manajemen kelas (Classroom) dengan sistem autentikasi Google OAuth2. Proyek ini sudah dikontainerisasi menggunakan **Docker**.
