@@ -13,6 +13,9 @@ COPY packages/shared ./packages/shared
 
 WORKDIR /app/apps/frontend
 
+ARG VITE_BACKEND_URL
+ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
+
 RUN bun run build
 
 # Stage 2: serve dengan nginx

@@ -11,7 +11,7 @@ import type { ApiResponse, HealthCheck, User } from "shared";
 const tokenStore = new Map<string, { access_token: string; refresh_token?: string }>();
 
 const app = new Elysia()
-  .use(cors({ origin: ["http://localhost:5173", "http://localhost:5174"], credentials: true }))
+  .use(cors({ origin: [process.env.FRONTEND_URL ?? "http://localhost:5173", "http://localhost:5173", "http://localhost:5174"], credentials: true }))
   .use(swagger())
   .use(cookie())
 
@@ -65,7 +65,7 @@ const app = new Elysia()
     session.maxAge = 60 * 60 * 24; // 1 hari
 
     // Redirect ke frontend
-    return redirect("http://localhost:5173/classroom");
+    return redirect(`${process.env.FRONTEND_URL ?? "http://localhost:5173"}/classroom`);
   })
 
   // Cek status login
