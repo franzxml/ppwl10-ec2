@@ -22,7 +22,12 @@ const app = new Elysia()
   }))
 
   // Users (dari Phase 2)
-  .get("/users", async () => {
+  .get("/users", async ({ query, set }) => {
+    const { key } = query as { key?: string };
+    if (!key || key !== process.env.API_KEY) {
+      set.status = 401;
+      return { message: "Unauthorized: Access denied without valid API Key" };
+    }
     const users = await prisma.user.findMany();
     const response: ApiResponse<User[]> = {
       data: users,
